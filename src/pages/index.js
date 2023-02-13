@@ -1,8 +1,12 @@
 import Banner from "components/Banner";
 import Header from "components/Header";
+import MediumCard from "components/MediumCard";
+import SmallCard from "components/SmallCard";
 import Head from "next/head";
 
-export default function Home() {
+export default function Home({ exploreData, cardsData }) {
+  console.log(exploreData);
+
   return (
     <>
       <Head>
@@ -19,13 +23,49 @@ export default function Home() {
       <Banner />
 
       {/* Section - Small Cards */}
-      <main className="border-2 max-w-7xl mx-auto px-8 sm:px-16">
-        <section className="border-2 border-red-400 pt-6">
+      <main className="max-w-7xl mx-auto px-8 sm:px-16">
+        <section className="pt-6">
           <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
           {/* Pull some data from a server - API Endpoints */}
-          
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {exploreData?.map((item) => (
+              <SmallCard
+                key={item.img}
+                img={item.img}
+                distance={item.distance}
+                location={item.location}
+              />
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
+          <div className="flex space-x-3 overflow-scroll scrollbar-hide infinite p-3 -ml-3">
+            {cardsData?.map(({ img, title }) => (
+              <MediumCard key={img} img={img} title={title} />
+            ))}
+              {cardsData?.map(({ img, title }) => (
+              <MediumCard key={img} img={img} title={title} />
+            ))}
+          </div>
         </section>
       </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const exploreData = await fetch("https://www.jsonkeeper.com/b/4G1G").then(
+    (res) => res.json()
+  );
+  const cardsData = await fetch("https://www.jsonkeeper.com/b/VHHT").then(
+    (res) => 
+    res.json()
+  );
+
+  return {
+    props: {
+      exploreData, cardsData
+    },
+  };
 }
