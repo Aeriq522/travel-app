@@ -1,8 +1,11 @@
 import Banner from "components/Banner";
 import Header from "components/Header";
+import LargeCard from "components/LargeCard";
 import MediumCard from "components/MediumCard";
 import SmallCard from "components/SmallCard";
+import footer from "components/Footer";
 import Head from "next/head";
+import Footer from "components/Footer";
 
 export default function Home({ exploreData, cardsData }) {
   console.log(exploreData);
@@ -44,12 +47,21 @@ export default function Home({ exploreData, cardsData }) {
             {cardsData?.map(({ img, title }) => (
               <MediumCard key={img} img={img} title={title} />
             ))}
-              {cardsData?.map(({ img, title }) => (
+            {cardsData?.map(({ img, title }) => (
               <MediumCard key={img} img={img} title={title} />
             ))}
           </div>
         </section>
+        <section className="relative py-16 cursor-pointer">
+          <LargeCard
+            img="https://images.fineartamerica.com/images-medium-large-5/7-background-travel-concept-potowizard-thailand.jpg"
+            title="The Greatest Outdoors"
+            description="Wishlists curated by Airbnb"
+            buttonText="Get Inspired"
+          />
+        </section>
       </main>
+      <Footer />
     </>
   );
 }
@@ -59,13 +71,13 @@ export async function getStaticProps() {
     (res) => res.json()
   );
   const cardsData = await fetch("https://www.jsonkeeper.com/b/VHHT").then(
-    (res) => 
-    res.json()
+    (res) => res.json()
   );
 
   return {
     props: {
-      exploreData, cardsData
+      exploreData,
+      cardsData,
     },
   };
 }
