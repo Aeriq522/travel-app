@@ -16,6 +16,7 @@ const LargeCard = ({ img, title, description, buttonText }) => {
           style={LargeCardStyle}
           alt="largeCard"
           className="rounded-2xl"
+          sizes="lg"
         />
       </div>
       <div className="absolute top-32 left-12">

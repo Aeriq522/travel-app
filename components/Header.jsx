@@ -34,6 +34,16 @@ function Header() {
     setSearchInput('');
   }
 
+  const search = () => router.push({
+    pathname: '/search',
+    query: {
+      location: searchInput,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+      noOfGuests,
+    }
+  })
+
   const handleDateSelect = (ranges) => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
@@ -43,7 +53,7 @@ function Header() {
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
       {/* Left - Logo */}
       <div onClick={() => router.push("/")} className="h-10 relative flex items-center cursor-pointer my-auto ">
-        <Image src="https://links.papareact.com/qd3" fill style={ImageStyle} />
+        <Image src="https://links.papareact.com/qd3" fill style={ImageStyle} alt='logo' sizes="md"/>
       </div>
       {/* Middle - Search*/}
       <div className="flex items-center md:border-2 rounded-full py-2 md:shadow-sm">
@@ -88,7 +98,7 @@ function Header() {
           </div>
           <div className="flex justify-evenly cursor-pointer">
             <button onClick={resetSearchInput} className="text-gray-500">Cancel</button>
-            <button className="text-red-400">Submit</button>
+            <button onClick={search} className="text-red-400">Submit</button>
           </div>
         </div>
       )}
