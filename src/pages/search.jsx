@@ -8,12 +8,12 @@ const Search = () => {
         <Header />
 
         <main className='flex'>
-            <section>
+            <section className='flex-grow pt-14 px-6'>
                 <p>
                     300 plus stays for 5 number of guests
                 </p>
                 <h1 className='text-3xl font-semibold my-2 mb-6'>Stays in Mars</h1>
-                <div>
+                <div className='hidden lg:inline-flex mb-5 space-x-3 text-gray-800 whitespace-nowrap'>
                     <p className='button'>Cancellation Flexibility</p>
                     <p className='button'>Type of Place</p>
                     <p className='button'>Price</p>
