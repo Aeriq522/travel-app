@@ -27,7 +27,7 @@ const Search = () => {
         <main className='flex'>
             <section className='flex-grow pt-14 px-6'>
                 <p>
-                    300 plus stays for {noOfGuests} number of guests
+                    300 plus stays for {noOfGuests} guests
                 </p>
                 <h1 className='text-3xl font-semibold my-2 mb-6'>Stays in {locationProcessed} </h1>
                 <div className='hidden lg:inline-flex mb-5 space-x-3 text-gray-800 whitespace-nowrap'>
