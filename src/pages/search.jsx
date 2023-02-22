@@ -1,49 +1,89 @@
-import Footer from 'components/Footer'
-import Header from 'components/Header'
-import { useRouter } from 'next/router'
-import React from 'react'
+import Footer from "components/Footer";
+import Header from "components/Header";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { format } from "date-fns";
+import SearchResultCard from "components/SearchResultCard";
 
-const Search = () => {
-    const router = useRouter();
+const Search = ({ searchResults }) => {
+  const [locationEntered, setLocationEntered] = useState("");
+  const [range, setRange] = useState("");
+  const router = useRouter();
 
-    // ES6 Destructuring
-    const { location, startDate, endDate, noOfGuests } = router.query;
-    
+  console.log(searchResults);
 
+  // ES6 Destructuring
+  const { location, startDate, endDate, noOfGuests } = router.query;
+
+  useEffect(() => {
     const unformatted_location = location.split(" ");
 
-        for (let i = 0; i < unformatted_location.length; i++) {
-            unformatted_location[i] =
-            unformatted_location[i][0].toUpperCase() + unformatted_location[i].substr(1);
-        }
-        const locationProcessed = unformatted_location.join(" ");
-
-    //console.log(location.charAt(0).toUpperCase() + location.slice(1))
+    for (let i = 0; i < unformatted_location.length; i++) {
+      unformatted_location[i] =
+        unformatted_location[i][0].toUpperCase() +
+        unformatted_location[i].substr(1);
+    }
+    setLocationEntered(unformatted_location.join(" "));
+    const formattedStartDate = format(new Date(startDate), "MM/dd/yy");
+    const formattedEndDate = format(new Date(endDate), "MM/dd/yy");
+    setRange(`${formattedStartDate} - ${formattedEndDate}`);
+  });
 
   return (
     <div>
-        <Header />
+      <Header placeholder={`${locationEntered} | ${range} | ${noOfGuests}`} />
 
-        <main className='flex'>
-            <section className='flex-grow pt-14 px-6'>
-                <p>
-                    300 plus stays for {noOfGuests} guests
-                </p>
-                <h1 className='text-3xl font-semibold my-2 mb-6'>Stays in {locationProcessed} </h1>
-                <div className='hidden lg:inline-flex mb-5 space-x-3 text-gray-800 whitespace-nowrap'>
-                    <p className='button'>Cancellation Flexibility</p>
-                    <p className='button'>Type of Place</p>
-                    <p className='button'>Price</p>
-                    <p className='button'>Rooms and Bed</p>
-                    <p className='button'>More Filters</p>
-                </div>
-            </section>
-        </main>
+      <main className="flex">
+        <section className="flex-grow pt-14 px-6">
+          <p>
+            300+ stays - {range} - for {noOfGuests} guests
+          </p>
+          <h1 className="text-3xl font-semibold my-2 mb-6">
+            Stays in {locationEntered}
+          </h1>
+          <div className="hidden lg:inline-flex mb-5 space-x-3 text-gray-800 whitespace-nowrap">
+            <p className="button">Cancellation Flexibility</p>
+            <p className="button">Type of Place</p>
+            <p className="button">Price</p>
+            <p className="button">Rooms and Bed</p>
+            <p className="button">More Filters</p>
+          </div>
+          <div className="flex flex-col">
+            {searchResults.map(
+              ({ img, location, title, description, star, price, total }) => (
+                <SearchResultCard
+                  key={img}
+                  img={img}
+                  location={location}
+                  title={title}
+                  description={description}
+                  star={star}
+                  price={price}
+                  total={total}
+                />
+              )
+            )}
+          </div>
+        </section>
+      </main>
 
-
-        <Footer/>
+      <Footer />
     </div>
-  )
+  );
+};
+
+export default Search;
+
+export async function getServerSideProps() {
+  const searchResults = await fetch("https://www.jsonkeeper.com/b/5NPS").then(
+    (res) => res.json()
+  );
+
+  return {
+    props: {
+      searchResults,
+    },
+  };
 }
 
-export default Search
+////Context serverside props can return the serach query? Need to look into this so you can refresh the page
