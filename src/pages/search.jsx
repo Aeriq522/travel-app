@@ -31,7 +31,7 @@ const Search = ({ searchResults }) => {
 
   return (
     <div>
-      <Header placeholder={`${locationEntered} | ${range} | ${noOfGuests}`} />
+      <Header placeholder={`${locationEntered} | ${range} | ${noOfGuests} Guests`} />
 
       <main className="flex">
         <section className="flex-grow pt-14 px-6">
