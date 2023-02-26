@@ -12,22 +12,25 @@ const SearchResultCard = ({
   price,
   total,
 }) => {
-
   const SearchResultCardStyle = {
     objectFit: "cover",
   };
 
   return (
-    <div className="flex border-2 py-2">
-      <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0">
+    <div className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg hover:scale-[101%] transform transition duration-300 ease-in-out first:border-t">
+      <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0 border">
+        <div>
+          <div className="bg-red-400 w-10 h-10 absolute top-20 left-2 hover:scale-[105%] transform transition duration-300 ease-in ">hi</div>
+          <div className="bg-red-500 w-10 h-10 absolute top-20 right-2 hover:scale-[105%] transform transition duration-300 ease-in ">bye</div>
+        </div>
         <Image
           src={img}
           style={SearchResultCardStyle}
           sizes="xl"
           fill
           alt="SearchResultCard"
-          className="hover:scale-105 transform transition duration-300 ease-out "
-        />
+          className="hover:scale-[102%] transform transition duration-300 ease-in-out z-10 hidden"
+        /> 
       </div>
       <div className="flex flex-col flex-grow pl-5">
         <div className="flex justify-between">
@@ -45,7 +48,7 @@ const SearchResultCard = ({
           </p>
           <div>
             <p className="text-lg font-semibold pb-2 lg:text-2xl">{price}</p>
-            <p>{total}</p>
+            <p className="text-right font-extralight">{total}</p>
           </div>
         </div>
       </div>
