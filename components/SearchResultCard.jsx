@@ -31,7 +31,7 @@ const SearchResultCard = ({
 
   return (
     <div className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg hover:scale-[101%] transform transition duration-300 ease-in-out first:border-t">
-      <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0 border">
+      <div className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0 ">
         {/* <div className="border border-blue-700 flex h-full justify-between items-center px-2 z-10">
           <div className="bg-white opacity-30 hover:opacity-60 w-10 h-10  hover:scale-[105%] transform transition duration-300 ease-in flex justify-center items-center text-4xl  rounded-lg">
             <HiChevronLeft onClick={clickedHandlerLeft} />
@@ -40,18 +40,20 @@ const SearchResultCard = ({
             <HiChevronRight onClick={clickedHandlerRight} />
           </div>
         </div> */}
-        <Carousel showThumbs={false} dynamicHeight={false}>
-          <div className="h-52 overflow-hidden">
-            {" "}
-            <img src={img} />
+        <Carousel
+          showThumbs={false}
+          dynamicHeight={false}
+          infiniteLoop={true}
+          className=" object-contain rounded-2xl hover:scale-[103%] transform transition duration-300 ease-in-out overflow-hidden relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0"
+        >
+          <div>
+            <img src={img} className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0 " />
           </div>
           <div>
-            {" "}
-            <img src={img} />
+            <img src={img} className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0 "/>
           </div>
           <div>
-            {" "}
-            <img src={img} />
+            <img src={img} className="relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0 "/>
           </div>
         </Carousel>
         {/* <Image
