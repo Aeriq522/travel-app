@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import SearchResultCard from "components/SearchResultCard";
+import Map from "components/Map";
 
 const Search = ({ searchResults }) => {
   const [locationEntered, setLocationEntered] = useState("");
@@ -31,7 +32,9 @@ const Search = ({ searchResults }) => {
 
   return (
     <div>
-      <Header placeholder={`${locationEntered} | ${range} | ${noOfGuests} Guests`} />
+      <Header
+        placeholder={`${locationEntered} | ${range} | ${noOfGuests} Guests`}
+      />
 
       <main className="flex">
         <section className="flex-grow pt-14 px-6">
@@ -64,6 +67,9 @@ const Search = ({ searchResults }) => {
               )
             )}
           </div>
+        </section>
+        <section className="hidden xl:inline-flex xl:min-w-[600px]">
+          <Map />
         </section>
       </main>
 
