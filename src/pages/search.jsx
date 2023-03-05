@@ -11,7 +11,7 @@ const Search = ({ searchResults }) => {
   const [range, setRange] = useState("");
   const router = useRouter();
 
-  console.log(searchResults);
+  // console.log(searchResults);
 
   // ES6 Destructuring
   const { location, startDate, endDate, noOfGuests } = router.query;
@@ -69,7 +69,7 @@ const Search = ({ searchResults }) => {
           </div>
         </section>
         <section className="hidden xl:inline-flex xl:min-w-[600px]">
-          <Map />
+          <Map searchResults={searchResults} />
         </section>
       </main>
 
