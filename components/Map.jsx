@@ -32,18 +32,15 @@ const Map = ({ searchResults }) => {
       onMove={(e) => setViewport(e.viewState)} //Grabs event object, and the viewstate in event then updates the map allowing you to drag and update
     >
       {searchResults.map((result) => (
-        console.log(result),
-        <div key={result.long}>
-          <Marker
-            longitude={result.long}
-            latitude={result.lat}
-            
-            offsetLeft={-20}
-            offsetRight={-10}
-          >
-            <p className="cursor-pointer text-2xl">📍</p>
-          </Marker>
-        </div>
+        <Marker
+          key={result.long}
+          longitude={result.long}
+          latitude={result.lat}
+          anchor="bottom"
+          pitchAlignment="viewport"
+        >
+          <p className="cursor-pointer text-2xl">📍</p>
+        </Marker>
       ))}
     </ReactMapGl>
   );
